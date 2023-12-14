@@ -1,68 +1,42 @@
-const { src, dest, watch } = require('gulp');
-const imagemin = require('gulp-imagemin');
-const sass = require('gulp-sass')(require('sass'))
-const xml2json = require('gulp-xml2json');
-const csv2json = require('gulp-csv2json');
+const { src, dest } = require('gulp');
 const replace = require('gulp-replace');
-const rename = require('gulp-rename');
-const webp = require('gulp-webp');
 
 const path = {
-    img: 'inputs/img/**/*',
-    scss: 'inputs/scss/**/*.scss',
-    xml: 'inputs/xml/**/*.xml',
-    csv: 'inputs/csv/**/*.csv',
-    replace: 'inputs/replace-str/**/*.*'
+    replaceHtml: 'inputs/replace-str/**/*.html',
+    replaceTxt: 'inputs/replace-str/**/*.txt'
 }
 
-function imagesToWebp() {
-    return src(path.img)
-        .pipe(webp())
-        .pipe(dest('outputs/img-webp/'));
-}
-
-function imagesToMinify() {
-    return src(path.img)
-        .pipe(imagemin())
-        .pipe(dest('outputs/img-min/'));
-}
-
-function scssToCss() {
-    return src(path.scss)
-        .pipe(sass())
-        .pipe(dest('outputs/css/'));
-}
-
-function xmlToJson() {
-    return src(path.xml)
-        .pipe(xml2json())
-        .pipe(rename({extname: '.json'}))
-        .pipe(dest('outputs/json/'));
-}
-
-function csvToJson() {
-    return src(path.csv)
-        .pipe(csv2json({}))
-        .pipe(rename({extname: '.json'}))
-        .pipe(dest('outputs/json/'));
-}
-
-function replaceString() {
-    return src(path.replace)
-        .pipe(replace('string to be replaced', 'string to replace'))
+function replaceStringTxt() {
+    return src(path.replaceTxt)
+        .pipe(replace('®', '(R)'))
+        .pipe(replace('©', '(C)'))
         .pipe(dest('outputs/replaced-str/'));
 };
 
-function observer() {
-    watch(path.img, imagesToWebp);
-    watch(path.img, imagesToMinify);
-    watch('inputs/scss/*.*', scssToCss);
-}
+function replaceStringHtml() {
+    return src(path.replaceHtml)
+        .pipe(replace('á', '&aacute;'))
+        .pipe(replace('é', '&eacute;'))
+        .pipe(replace('í', '&iacute;'))
+        .pipe(replace('ó', '&oacute;'))
+        .pipe(replace('ú', '&uacute;'))
+        .pipe(replace('Á', '&Aacute;'))
+        .pipe(replace('É', '&Eacute;'))
+        .pipe(replace('Í', '&Iacute;'))
+        .pipe(replace('Ó', '&Oacute;'))
+        .pipe(replace('Ú', '&Uacute;'))
+        .pipe(replace('ñ', '&ntilde;'))
+        .pipe(replace('®', '<sup>&reg;</sup>'))
+        .pipe(replace('©', '&copy;'))
+        .pipe(replace('$', '&#36;'))
+        .pipe(dest('outputs/replaced-str/'));
+};
 
-exports.default = observer;
-exports.replacer = replaceString;
-exports.minify = imagesToMinify;
-exports.webp = imagesToWebp;
-exports.scss = scssToCss;
-exports.xml = xmlToJson;
-exports.csv = csvToJson;
+function replaceAll() {
+  replaceStringTxt;
+  replaceStringHtml;
+};
+
+exports.replacerAll = replaceAll;
+exports.replacerTxt = replaceStringTxt;
+exports.replacerHtml = replaceStringHtml;
