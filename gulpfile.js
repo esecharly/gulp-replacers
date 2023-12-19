@@ -1,16 +1,16 @@
-const { src, dest } = require('gulp');
+const { src, dest, series } = require('gulp');
 const replace = require('gulp-replace');
 
 const path = {
-    replaceHtml: 'inputs/replace-str/**/*.html',
-    replaceTxt: 'inputs/replace-str/**/*.txt'
+    replaceHtml: 'inputs/**/*.html',
+    replaceTxt: 'inputs/**/*.txt'
 }
 
 function replaceStringTxt() {
     return src(path.replaceTxt)
         .pipe(replace('®', '(R)'))
         .pipe(replace('©', '(C)'))
-        .pipe(dest('outputs/replaced-str/'));
+        .pipe(dest('outputs/'));
 };
 
 function replaceStringHtml() {
@@ -29,14 +29,9 @@ function replaceStringHtml() {
         .pipe(replace('®', '<sup>&reg;</sup>'))
         .pipe(replace('©', '&copy;'))
         .pipe(replace('$', '&#36;'))
-        .pipe(dest('outputs/replaced-str/'));
+        .pipe(dest('outputs/'));
 };
 
-function replaceAll() {
-  replaceStringTxt;
-  replaceStringHtml;
-};
-
-exports.replacerAll = replaceAll;
+exports.replacerAll = series(replaceStringHtml, replaceStringTxt);
 exports.replacerTxt = replaceStringTxt;
 exports.replacerHtml = replaceStringHtml;
