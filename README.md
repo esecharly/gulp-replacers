@@ -33,9 +33,11 @@ Este comando instalar&aacute; los modulos necesarios
 
 Terminado el proceso de instalacion de dichos modulos contaremos con dos funciones para ejecutar desde el gulp CLI
 
-1) `gulp replacerTxt` -> Reemplaza los caracteres de los archivos `.txt` contenidos en el directorio `inputs/replace-str` y las alojara en el directorio `outputs/replaced-str`.
+1) `gulp replacerTxt` -> Reemplaza los caracteres de los archivos `.txt` contenidos en el directorio `inputs/` y las alojara en el directorio `outputs/`.
 
-2) `gulp replacerHtml` -> Reemplaza los caracteres de los archivos `.html` contenidos en el directorio `inputs/replace-str` y las alojara en el directorio `outputs/replaced-str`.
+2) `gulp replacerHtml` -> Reemplaza los caracteres de los archivos `.html` contenidos en el directorio `inputs/` y las alojara en el directorio `outputs/`.
+
+3) `gulp replacerAll` -> Ejecuta las dos funciones descritas arriba
 
 ### Mas Informaci&oacute;n
 
