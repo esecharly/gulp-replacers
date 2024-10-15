@@ -33,11 +33,15 @@ Este comando instalar&aacute; los modulos necesarios
 
 Terminado el proceso de instalacion de dichos modulos contaremos con dos funciones para ejecutar desde el gulp CLI
 
-1) `gulp replacerTxt` -> Reemplaza los caracteres de los archivos `.txt` contenidos en el directorio `inputs/` y las alojara en el directorio `outputs/`.
+1) `gulp replacerTxt` -> Reemplaza los caracteres de los archivos `.txt` contenidos en el directorio `inputs/` y creara una copia con los cambios en el directorio `outputs/`.
 
-2) `gulp replacerHtml` -> Reemplaza los caracteres de los archivos `.html` contenidos en el directorio `inputs/` y las alojara en el directorio `outputs/`.
+2) `gulp replacerHtml` -> Reemplaza los caracteres de los archivos `.html` contenidos en el directorio `inputs/` y creara una copia con los cambios en el directorio `outputs/`.
 
-3) `gulp replacerAll` -> Ejecuta las dos funciones descritas arriba
+3) `gulp replacerAll` -> Ejecuta las dos funciones descritas arriba.
+
+4) `gulp finalesHtml` -> Reemplaza la ruta `image/` por links finales de AMEX (Marigold) de los archivos `.html` contenidos en el directorio `inputs/` y creara una copia con los cambios en el directorio `outputs/`.
+
+5) `gulp cheetahToMarigold` Reemplaza las variables de Cheetah por las variables de Marigold en los archivos `.html` y `.txt` contenidos en el directorio `inputs/` y creara una copia con los cambios en el directorio `outputs/`.
 
 ### Mas Informaci&oacute;n
 
