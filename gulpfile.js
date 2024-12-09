@@ -70,8 +70,23 @@ function cheetahToMarigoldTxt() {
         .pipe(dest("outputs/"));
 };
 
+function customReplaceHtml(){
+    return src(path.replaceHtml)
+    .pipe(replace('href="https://paymentsportal.americanexpress.com/"', 'href="https://paymentsportal.americanexpress.com/?inav=mx_menu_mi_cuenta_negocios_portal_de_pagos"'))
+
+    .pipe(dest("outputs/"));
+}
+
+function customReplaceTxt(){
+    return src(path.replaceTxt)
+    .pipe(replace("Antevenio_Tecnologia", "Antevenio_Tecnologia"))
+
+    .pipe(dest("outputs/"));
+}
+
 exports.replacerAll = series(replaceStringHtml, replaceStringTxt);
 exports.replacerTxt = replaceStringTxt;
 exports.replacerHtml = replaceStringHtml;
 exports.finalesHtml = finalesHtml;
 exports.cheetahToMarigold = series(cheetahToMarigoldHtml, cheetahToMarigoldTxt);
+exports.customReplace = series(customReplaceHtml, customReplaceTxt);
